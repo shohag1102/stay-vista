@@ -110,6 +110,7 @@ app.get('/', (req, res) => {
   res.send('Hello from StayVista Server..')
 })
 
+
 app.listen(port, () => {
   console.log(`StayVista is running on port ${port}`)
 })
