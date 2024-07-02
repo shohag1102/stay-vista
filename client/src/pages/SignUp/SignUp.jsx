@@ -1,11 +1,18 @@
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {FcGoogle} from 'react-icons/fc'
-import {getImage} from "../../api/utils.js";
+import {getImage, getToken} from "../../api/utils.js";
 import useAuth from "../../hooks/useAuth.js";
+import { saveUser } from '../../api/auth.js';
+import {toast} from 'react-hot-toast';
+import { useState } from 'react';
+import { ScaleLoader } from 'react-spinners'
 
 const SignUp = () => {
     const {createUser, updateUserProfile, signInWithGoogle} = useAuth()
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate()
     let handleSubmit = async (event) => {
+        setIsLoading(true);
         event.preventDefault()
         const form = event.target
         const name = form.name.value
@@ -20,14 +27,27 @@ const SignUp = () => {
             const result = await createUser(email, password)
             // update user profile
             await updateUserProfile(name, imageData?.data?.display_url)
-            console.log('from create user]', result)
-            //     save user to db
+            console.log('from create user]', result?.user)
+            // save user to db
+            const dbResp = await saveUser(result?.user)
+            console.log('response:', dbResp)
+
             // save user email
 
             // get token
+            await getToken(result?.user?.email)
+
+            setIsLoading(false)
+
+            toast.success('Sign Up Successfully')
+
+            // navigate to home
+            navigate('/')
 
         } catch (e) {
-            console.log(e.message)
+            setIsLoading(false)
+            toast.error('Sign Up Error')
+            console.log('[error]',e)
         }
     }
     return (
@@ -106,7 +126,7 @@ const SignUp = () => {
                             type='submit'
                             className='bg-rose-500 w-full rounded-md py-3 text-white'
                         >
-                            Continue
+                            {isLoading ? <ScaleLoader height={15} color='white'/> : 'Continue'}
                         </button>
                     </div>
                 </form>
@@ -120,7 +140,6 @@ const SignUp = () => {
                 <div
                     className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
                     <FcGoogle size={32}/>
-
                     <p>Continue with Google</p>
                 </div>
                 <p className='px-6 text-sm text-center text-gray-400'>

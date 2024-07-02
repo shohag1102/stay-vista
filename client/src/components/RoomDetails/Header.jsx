@@ -1,4 +1,3 @@
-import React from 'react'
 import Heading from "../Shared/Heading.jsx";
 
 const Header = ({room: roomData}) => {

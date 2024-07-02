@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="80d83031-cf84-45f0-92e7-df1ac9c888fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Rooms/Rooms.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Rooms/Rooms.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/RoomDetails/RoomDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/RoomDetails/RoomDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/RoomDetails/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/RoomDetails/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/RoomDetails/RoomReservation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/RoomDetails/RoomReservation.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/SignUp/SignUp.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/SignUp/SignUp.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +90,7 @@
       <workItem from="1719815380496" duration="7439000" />
       <workItem from="1719834530043" duration="607000" />
       <workItem from="1719840706985" duration="10304000" />
-      <workItem from="1719908503330" duration="5830000" />
+      <workItem from="1719908503330" duration="8901000" />
     </task>
     <servers />
   </component>
