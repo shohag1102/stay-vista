@@ -13,6 +13,7 @@ const Rooms = () => {
     useEffect(() => {
         setLoading(true)
         fetch("https://raw.githubusercontent.com/shakilahmedatik/b9-stayVista-starter-template/main/client/public/rooms.json")
+        //     fetch('/rooms.json')
             .then(resp => resp.json())
             .then(data => {
                 if (category) {
