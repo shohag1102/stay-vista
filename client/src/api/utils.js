@@ -1,5 +1,5 @@
 import axios from "axios";
-import axiosSecure from ".";
+
 export const getImage = async (image) => {
     const formData = new FormData()
     formData.append('image', image)
@@ -9,7 +9,3 @@ export const getImage = async (image) => {
     return data;
 }
 
-export const getToken = async (email)=>{
-    const data = await axiosSecure.post('/jwt', {email})
-    return data
-}

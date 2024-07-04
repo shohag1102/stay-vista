@@ -1,11 +1,11 @@
 import {Link, useNavigate} from 'react-router-dom'
 import {FcGoogle} from 'react-icons/fc'
-import {getImage, getToken} from "../../api/utils.js";
+import {getImage} from "../../api/utils.js";
 import useAuth from "../../hooks/useAuth.js";
-import { saveUser } from '../../api/auth.js';
+import { getToken, saveUser } from '../../api/auth.js';
 import {toast} from 'react-hot-toast';
+import {TbFidgetSpinner} from 'react-icons/tb'
 import { useState } from 'react';
-import { ScaleLoader } from 'react-spinners'
 
 const SignUp = () => {
     const {createUser, updateUserProfile, signInWithGoogle} = useAuth()
@@ -44,6 +44,32 @@ const SignUp = () => {
             // navigate to home
             navigate('/')
 
+        } catch (e) {
+            setIsLoading(false)
+            toast.error('Sign Up Error')
+            console.log('[error]',e)
+        }
+    }
+    const handleGoogleSignIn = async() => {
+        try {
+            setIsLoading(true);
+            
+            // create user with google
+            const result = await signInWithGoogle()
+
+            // save user to db
+            const dbResp = await saveUser(result?.user)
+            console.log('response:', dbResp)
+
+            // get token
+            await getToken(result?.user?.email)
+
+            setIsLoading(false)
+
+            toast.success('Sign Up Successfully')
+
+            // navigate to home
+            navigate('/')
         } catch (e) {
             setIsLoading(false)
             toast.error('Sign Up Error')
@@ -126,7 +152,7 @@ const SignUp = () => {
                             type='submit'
                             className='bg-rose-500 w-full rounded-md py-3 text-white'
                         >
-                            {isLoading ? <ScaleLoader height={15} color='white'/> : 'Continue'}
+                            {isLoading ? <TbFidgetSpinner className='animate-spin m-auto'/> : 'Continue'}
                         </button>
                     </div>
                 </form>
@@ -137,7 +163,8 @@ const SignUp = () => {
                     </p>
                     <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
                 </div>
-                <div
+                <div 
+                    onClick={handleGoogleSignIn}
                     className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
                     <FcGoogle size={32}/>
                     <p>Continue with Google</p>
