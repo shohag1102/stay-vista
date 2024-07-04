@@ -11,6 +11,8 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate()
     const location = useLocation()
+    const from = location?.state?.from?.pathname || '/';
+    console.log('from login page', from)
 
   let handleSubmit = async (event) => {
         setIsLoading(true);
@@ -33,7 +35,7 @@ const Login = () => {
             toast.success('Sign In Successfully')
 
             // navigate to home if location is not set
-            navigate(location?.state ? location?.state : '/');
+            navigate(location.state ? location.state : '/', {replace:true});
 
         } catch (e) {
             setIsLoading(false)
@@ -58,9 +60,9 @@ const Login = () => {
             setIsLoading(false)
 
             toast.success('Sign In Successfully')
-            navigate(location?.state ? location?.state : '/');
-            // navigate to home
-            // navigate('/')
+
+            navigate(location.state ? location.state : '/', {replace:true});
+
         } catch (e) {
             setIsLoading(false)
             toast.error('Sign Up Error')
