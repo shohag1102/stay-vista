@@ -1,29 +1,13 @@
 import Container from "../../components/Shared/Container.jsx";
-import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
-import Loader from "../../components/Shared/Loader.jsx";
+import {useLoaderData} from "react-router-dom";
 import {Helmet} from "react-helmet-async";
 import Header from "../../components/RoomDetails/Header.jsx";
 import RoomInfo from "../../components/RoomDetails/RoomInfo.jsx";
 import RoomReservation from "../../components/RoomDetails/RoomReservation.jsx";
 
 const RoomDetails = () => {
-    const {id} = useParams()
-    let [room, setRoom] = useState({})
-    let [loading, setLoading] = useState(false)
-    // console.log(room)
-    useEffect(() => {
-        setLoading(true)
-        fetch("https://raw.githubusercontent.com/shakilahmedatik/b9-stayVista-starter-template/main/client/public/rooms.json")
-        // fetch('/rooms.json')
-            .then(resp => resp.json())
-            .then(data => {
-                let singleRoom = data.find(room => room._id === id);
-                setRoom(singleRoom)
-                setLoading(false)
-            })
-    }, [id]);
-    if (loading) return <Loader/>
+    const room = useLoaderData()
+    console.log('from roomdetails', room)
 
     return (
         <Container>

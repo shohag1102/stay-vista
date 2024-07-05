@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import Card from "./Card.jsx";
 import Container from "../Shared/Container.jsx";
 import {useSearchParams} from "react-router-dom";
 import Heading from "../Shared/Heading.jsx";
 import Loader from "../Shared/Loader.jsx";
+import { getAllRooms } from '../../api/rooms.js';
 
 const Rooms = () => {
     let [rooms, setRooms] = useState([])
@@ -12,9 +13,7 @@ const Rooms = () => {
     let category = params.get('category')
     useEffect(() => {
         setLoading(true)
-        fetch("https://raw.githubusercontent.com/shakilahmedatik/b9-stayVista-starter-template/main/client/public/rooms.json")
-        //     fetch('/rooms.json')
-            .then(resp => resp.json())
+        getAllRooms()
             .then(data => {
                 if (category) {
                     const filteredData = data.filter(cat => cat.category === category)

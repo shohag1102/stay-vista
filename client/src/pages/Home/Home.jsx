@@ -3,6 +3,7 @@ import Categories from "../../components/Categories/Categories.jsx";
 import {Helmet} from "react-helmet-async";
 
 const Home = () => {
+    
     return (
         <div>
             <Helmet>

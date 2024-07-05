@@ -1,15 +1,12 @@
 import {DateRange} from 'react-date-range';
 
-const DatePicker = ({value, handleSelect}) => {
+const DatePicker = ({value}) => {
     return (
         <DateRange
             rangeColors={["#F43F5E"]}
-            editableDateInputs={true}
             direction = 'vertical'
-            // onChange={item => setState([item.selection])}
-            moveRangeOnFirstSelection={false}
-            // ranges={[value]}
             showDateDisplay = {false}
+            ranges={[value]}
         />
     );
 };
